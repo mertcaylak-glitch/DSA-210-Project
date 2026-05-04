@@ -6,7 +6,7 @@ This project investigates whether the pace of AI research — as measured by dai
 
 ---
 
-## 💡 Motivation
+##  Motivation
 
 Artificial Intelligence has arguably been the defining technological force of the past decade. As research output in AI has grown exponentially — doubling roughly every few years — so too has investor interest in AI-adjacent assets. This raises a natural question: does the *intensity* of academic AI innovation, as proxied by daily arXiv submission volumes, leave any measurable fingerprint on the financial performance of an AI-focused ETF?
 
@@ -16,12 +16,12 @@ On a personal level, I was motivated by the observation that many landmark AI pa
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 ├── 00_ETFDataAcquisition.ipynb          # BOTZ ETF price data collection (yfinance)
 ├── 00_PaperDataAcquisition.ipynb        # arXiv cs.AI paper counts (OAI-PMH)
-├── 00_MasterDatasetPreparation.ipynb    # Dataset merging & accumulation logic
+├── 00_MasterDatasetAcquisition.ipynb    # Dataset merging & accumulation logic
 ├── 01_EDA_improved.ipynb                # Exploratory Data Analysis
 ├── 02_HT_improved.ipynb                 # Hypothesis Testing (Granger Causality)
 ├── 03_EDAHT-2_improved.ipynb            # Event-Driven Market Reaction Analysis
@@ -34,7 +34,7 @@ On a personal level, I was motivated by the observation that many landmark AI pa
 
 ---
 
-## 🗂️ Data Sources
+##  Data Sources
 
 ### BOTZ ETF (Financial Data)
 - **Source:** Yahoo Finance via the `yfinance` Python library
@@ -51,13 +51,13 @@ On a personal level, I was motivated by the observation that many landmark AI pa
 - **Collection:** Server-side filtered harvest; see `00_PaperDataAcquisition.ipynb`
 
 ### Master Dataset Construction
-The two raw sources operate on incompatible time grids: BOTZ data exists only on trading days, while arXiv receives submissions every day of the week including weekends and public holidays. The `00_MasterDatasetPreparation.ipynb` notebook documents the merging strategy in full detail.
+The two raw sources operate on incompatible time grids: BOTZ data exists only on trading days, while arXiv receives submissions every day of the week including weekends and public holidays. The `00_MasterDatasetAcquisition.ipynb` notebook documents the merging strategy in full detail.
 
 **Key design decision — weekend accumulation:** For each trading day `t`, the assigned paper count is the **sum** of all arXiv submissions from all calendar days since the previous trading day (exclusive) up to and including `t`. This means Monday's count = Saturday + Sunday + Monday submissions. A naive calendar-date merge would silently discard all weekend submissions, introducing a systematic downward bias on every Monday.
 
 ---
 
-## 🔬 Research Pipeline
+##  Research Pipeline
 
 ```
 Data Acquisition → Dataset Preparation → EDA → Hypothesis Testing → Event Study → Machine Learning
@@ -165,7 +165,7 @@ Tests whether non-linear ML models can extract a predictive signal that simple c
 
 ---
 
-## 📊 Key Results
+##  Key Results
 
 | Stage | Finding |
 |-------|---------|
@@ -178,7 +178,7 @@ Tests whether non-linear ML models can extract a predictive signal that simple c
 
 ---
 
-## 🧠 Interpretation
+##  Interpretation
 
 The consistently near-zero or negative predictive performance across all model types is consistent with the **Efficient Market Hypothesis**: arXiv paper counts are publicly available information that is rapidly absorbed into asset prices. No model — linear or non-linear, shallow or deep — reliably extracts an exploitable signal from this data alone.
 
@@ -188,7 +188,7 @@ The counterintuitive clustering finding deserves note: *low-publication days ten
 
 ---
 
-## ⚠️ Limitations & Suggested Extensions
+##  Limitations & Suggested Extensions
 
 | Limitation | Suggested Improvement |
 |------------|----------------------|
@@ -202,7 +202,7 @@ The counterintuitive clustering finding deserves note: *low-publication days ten
 
 ---
 
-## 🛠️ Requirements
+##  Requirements
 
 Install all dependencies via:
 
@@ -214,7 +214,7 @@ Core packages: `numpy`, `pandas`, `matplotlib`, `seaborn`, `scipy`, `statsmodels
 
 ---
 
-## 🚀 Reproducing the Analysis
+##  Reproducing the Analysis
 
 Run the notebooks in the following order. Each notebook saves its output for the next stage.
 
@@ -235,7 +235,7 @@ jupyter notebook 04_ML_improved.ipynb
 
 ---
 
-## 📌 Methodological Notes
+##  Methodological Notes
 
 - All analysis is conducted on **stationary** transformations of both series. Using raw price levels inflates correlations via shared trends — this is demonstrated explicitly in `01_EDA_improved`.
 - **Granger causality is not true causality.** A significant result means predictive precedence, not mechanism.
@@ -244,17 +244,13 @@ jupyter notebook 04_ML_improved.ipynb
 
 ---
 
-## 🤖 AI Assistance Disclosure
-
-In accordance with DSA 210 course guidelines, the use of AI tools in this project is disclosed here.
+##  AI Assistance Disclosure
 
 **Specific areas where AI assistance was used:**
 - Refining notebook cell structure and markdown documentation
-- Debugging data pipeline code (yfinance column handling, OAI-PMH iteration)
+- Debugging data pipeline code
 - Improving plot formatting and panel layouts
 
 AI assistance was not used to generate hypotheses, select statistical tests, interpret findings, or draw conclusions.
 
 ---
-
-*Analysis period: September 2016 – December 2023*
