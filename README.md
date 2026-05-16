@@ -125,7 +125,6 @@ Shifts from aggregate to individual: do specific landmark AI publications trigge
 - Minimum 60-trading-day inter-event spacing filter to prevent contamination
 - Multi-window robustness check: [−1,+1], [−3,+3], [−5,+10] day windows
 - Benjamini-Hochberg FDR correction for multiple comparisons
-- AlphaFold 3 removed (date falls outside dataset range)
 
 ---
 
